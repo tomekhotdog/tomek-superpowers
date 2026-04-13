@@ -1,0 +1,10 @@
+{
+  "name": "tomek-superpowers",
+  "description": "Personal engineering workflow: deep modules, product-first design, structured build pipeline, and self-improvement loop",
+  "version": "1.0.0",
+  "author": {
+    "name": "Tomek Szymaniec"
+  },
+  "license": "MIT",
+  "keywords": ["workflow", "design", "planning", "tdd", "debugging", "code-review", "deep-modules"]
+}

@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# SessionStart hook for tomek-superpowers plugin
+# Implements the 6-step session-start behavior from the design doc
+
+set -euo pipefail
+
+# Determine plugin root directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Read using-tomek-superpowers content
+using_skill_content=$(cat "${PLUGIN_ROOT}/skills/using-tomek-superpowers/SKILL.md" 2>&1 || echo "Error reading using-tomek-superpowers skill")
+
+# Escape string for JSON embedding
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+# Step 1: Inject using-tomek-superpowers skill content
+using_skill_escaped=$(escape_for_json "$using_skill_content")
+
+# Steps 2-6: Build context reminders based on project state
+reminders=""
+
+# Step 2: Check for docs/language.md
+if [ -f "docs/language.md" ]; then
+    reminders="${reminders}\\n\\n<important-reminder>Read docs/language.md — use canonical terms in all output.</important-reminder>"
+fi
+
+# Step 3: Check for docs/spec.md
+if [ -f "docs/spec.md" ]; then
+    reminders="${reminders}\\n\\n<important-reminder>docs/spec.md contains the product spec — read it for context before starting work.</important-reminder>"
+fi
+
+# Step 4: Check for docs/lessons.md
+if [ -f "docs/lessons.md" ]; then
+    reminders="${reminders}\\n\\n<important-reminder>Review docs/lessons.md before starting work — it contains past lessons and patterns to avoid.</important-reminder>"
+fi
+
+# Step 5: Check for plan files in docs/plans/
+if [ -d "docs/plans" ] && [ "$(ls -A docs/plans/ 2>/dev/null)" ]; then
+    reminders="${reminders}\\n\\n<important-reminder>Check docs/plans/ for in-progress work before starting something new.</important-reminder>"
+fi
+
+# Step 6: Check for handoff files in docs/handoffs/
+if [ -d "docs/handoffs" ] && [ "$(ls -A docs/handoffs/ 2>/dev/null)" ]; then
+    reminders="${reminders}\\n\\n<important-reminder>Check docs/handoffs/ for session handoffs to resume.</important-reminder>"
+fi
+
+reminders_escaped=$(escape_for_json "$reminders")
+session_context="<EXTREMELY_IMPORTANT>\nYou have tomek-superpowers.\n\n**Below is the full content of your 'tomek-superpowers:using-tomek-superpowers' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_skill_escaped}\n\n${reminders_escaped}\n</EXTREMELY_IMPORTANT>"
+
+# Output context injection as JSON
+cat <<EOF
+{
+  "additional_context": "${session_context}",
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": "${session_context}"
+  }
+}
+EOF
+
+exit 0
