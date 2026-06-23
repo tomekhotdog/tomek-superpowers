@@ -34,7 +34,7 @@ digraph process {
     "Mark task complete in plan file" [shape=box];
     "More tasks?" [shape=diamond];
     "Dispatch final code-reviewer for entire implementation" [shape=box];
-    "Use tomek-superpowers:verify" [shape=box];
+    "Use tomek-workflow:verify" [shape=box];
 
     "Read plan file from docs/plans/" -> "Extract all tasks with full text";
     "Extract all tasks with full text" -> "Dispatch implementer subagent";
@@ -54,7 +54,7 @@ digraph process {
     "Mark task complete in plan file" -> "More tasks?";
     "More tasks?" -> "Dispatch implementer subagent" [label="yes"];
     "More tasks?" -> "Dispatch final code-reviewer for entire implementation" [label="no"];
-    "Dispatch final code-reviewer for entire implementation" -> "Use tomek-superpowers:verify";
+    "Dispatch final code-reviewer for entire implementation" -> "Use tomek-workflow:verify";
 }
 ```
 

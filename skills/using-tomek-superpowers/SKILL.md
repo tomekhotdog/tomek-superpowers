@@ -36,7 +36,7 @@ When a task arrives, classify it and follow the right path:
 **New feature or unknown approach** → `design` → `plan` → `build` → `verify` → `request-review` → `finish-branch`
 
 **Available at any point:**
-- `grill` — stress-test decisions
+- `cross-examine` — stress-test decisions
 - `refactor` — when you spot friction
 - `handoff` — transfer work between sessions
 

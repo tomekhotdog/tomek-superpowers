@@ -51,7 +51,7 @@ claude plugin add tomekhotdog/tomek-superpowers
  Trivial (< 5 min): just do it → verify
 
  Available at any point:
-   grill      ── stress-test decisions
+   cross-examine ── stress-test decisions
    refactor   ── when you spot friction
    handoff    ── transfer work between sessions
 ```
@@ -67,7 +67,7 @@ Always-on directives covering workflow orchestration, self-improvement loop, qua
 | Phase | Skill | What it does |
 |---|---|---|
 | **Define** | `design` | Research codebase, interview user, produce design doc |
-| **Define** | `grill` | Adversarial design interrogation, one question at a time |
+| **Define** | `cross-examine` | Adversarial design interrogation, one question at a time |
 | **Decompose** | `plan` | Vertical slice decomposition with TDD baked in |
 | **Build** | `build` | Subagent dispatch with two-stage review (spec + quality) |
 | **Build** | `debug` | 4-phase systematic debugging with root cause tracing |

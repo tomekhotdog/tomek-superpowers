@@ -7,7 +7,7 @@ Use this template when dispatching a code quality reviewer subagent.
 **Only dispatch after spec compliance review passes.**
 
 ```
-Agent tool (tomek-superpowers:code-reviewer):
+Agent tool (tomek-workflow:code-reviewer):
   Use the code-reviewer agent with these placeholders:
 
   WHAT_WAS_IMPLEMENTED: [from implementer's report]

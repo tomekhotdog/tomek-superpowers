@@ -15,7 +15,7 @@ Decompose a design into a numbered, dependency-annotated task list using vertica
 
 ### Step 1: Read the Design Doc
 
-Read the design doc from `docs/plans/`. All questions should already be resolved by `design` + `grill`. If anything is ambiguous, resolve it now — do not leave gaps for the implementer to figure out.
+Read the design doc from `docs/plans/`. All questions should already be resolved by `design` + `cross-examine`. If anything is ambiguous, resolve it now — do not leave gaps for the implementer to figure out.
 
 ### Step 2: Decompose Using Vertical Slices
 

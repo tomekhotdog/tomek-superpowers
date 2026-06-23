@@ -15,15 +15,9 @@ Turn ideas into fully formed designs through research, collaborative dialogue, a
 
 ### Step 1: Research Phase (Before Proposing Anything)
 
-Dispatch all three documentarian sub-agents **in parallel** — do not run them sequentially:
+Dispatch the `research` skill as a subagent to explore the codebase. It dispatches the three documentarian agents in parallel, synthesizes findings, and persists a research document to `docs/plans/`.
 
-- **codebase-locator** — finds where relevant code lives, organised by purpose
-- **codebase-analyzer** — explains how relevant code works with `file:line` references
-- **codebase-pattern-finder** — discovers similar implementations and reusable patterns
-
-Wait for all three to return before proceeding.
-
-Also trigger this research phase when user says "investigate", "how does X work", "where is X implemented" — even outside the full design flow.
+Wait for the research subagent to complete, then read its research document before proceeding.
 
 ### Step 2: Interview the User
 
@@ -54,8 +48,9 @@ After design approval:
 
 1. **Write design doc** to `docs/plans/YYYY-MM-DD-<topic>-design.md` using the format below
 2. **Rewrite `docs/spec.md`** — the persistent product spec reflecting the product as it will be after this iteration (rewritten clean, not appended)
-3. **Update `docs/language.md`** — extract/refine domain terminology. Flag ambiguities, pick canonical terms, list aliases to avoid
-4. **Prune stale entries from `docs/lessons.md`** — remove lessons that are no longer relevant
+3. **Invoke the `language` skill** to update `docs/language.md` with any new or changed domain terminology from this design
+4. **Invoke the `features` skill** to update `docs/features.md` with any new or changed features from this design
+5. **Prune stale entries from `docs/lessons.md`** — remove lessons that are no longer relevant
 
 ### Step 6: Commit the Design
 
