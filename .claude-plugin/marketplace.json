@@ -1,0 +1,14 @@
+{
+  "name": "tomek-plugins",
+  "description": "Tomek's personal plugin marketplace",
+  "owner": {
+    "name": "Tomek Szymaniec"
+  },
+  "plugins": [
+    {
+      "name": "tomek-superpowers",
+      "source": "./",
+      "description": "Personal engineering workflow: deep modules, product-first design, structured build pipeline, and self-improvement loop"
+    }
+  ]
+}
